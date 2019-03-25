@@ -1,0 +1,24 @@
+<mat-expansion-panel [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span [class]="'line-number-block line-'+timetable.lineId">{{timetable.lineId}}</span> 号线 {{timetable.stationName}} 往&nbsp;
+      <span *ngIf="timetable.destStationName==undefined">{{timetable.directionDisplay}}</span>
+      <span *ngIf="timetable.destStationName!==undefined">{{timetable.destStationName}}</span>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="timetable-content" *ngIf="trains!=null&&trains.length>0">
+    <span class="timetable-detail">运行图：{{trains[0].digramNum.replace('G','工作日').replace('Y','延长').replace('J','节假日')}}</span>
+    <span class="timetable-detail" *ngIf="!timetable.isLive">指定时间：{{timetable.startTime}}</span>
+  <div *ngFor="let item of trains.slice(0,3)">
+    <mat-divider></mat-divider>
+    <label class="train-countdown">{{item.countdown}}</label>
+    <div class="train-detail">
+      <span class><a href="#">{{item.trainNo}}次</a> {{item.startStationName}} -&gt; {{item.finalStationName}}</span><br/>
+      <span>{{getTimeDisplay(item.fromArrival)}}到 {{getTimeDisplay(item.fromDeparture)}}开</span><br/>
+      <span *ngIf="timetable.destStationName!==undefined">{{getTimeDisplay(item.destArrival)}}到{{item.destStationName}}</span> <a href="#">换乘时刻查询</a><br/>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+  
+</div>
+</mat-expansion-panel>

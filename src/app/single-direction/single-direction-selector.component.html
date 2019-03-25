@@ -1,0 +1,54 @@
+<div class="container">
+  <form [formGroup]="selectorForm">
+    <div class="row">
+      <div class="col-12">
+        <app-line-station-selector [initialStationId]="111" (stationSelected)="fromStationSelected()"></app-line-station-selector>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field>
+          <mat-select [placeholder]="'方向/到站'" formControlName="destStationId">
+            <mat-option *ngFor="let item of destStationList" [value]="item.value">{{item.text}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <mat-radio-group formControlName="diagramTypeSelection">
+        <mat-radio-button value="live" class="col-4">自动*</mat-radio-button>
+        <mat-radio-button value="MonToThur" class="col-3">周一-四</mat-radio-button>
+        <mat-radio-button value="Fri" class="col-4">周五</mat-radio-button>
+        <mat-radio-button value="Sat" class="col-4">周六</mat-radio-button>
+        <mat-radio-button value="Sun" class="col-3">周日</mat-radio-button>
+        <mat-radio-button value="other" class="col-4">指定图</mat-radio-button>
+      </mat-radio-group>
+      <!--Specify map-->
+      <div class="col-12" *ngIf="selectorForm.controls['diagramTypeSelection'].value==='other'">
+        <mat-form-field>
+          <input matInput type="text" placeholder="图号+G/J/GY/JY" formControlName="diagramSpecified">
+        </mat-form-field>
+      </div>
+      <div class="col-6" *ngIf="selectorForm.controls['diagramTypeSelection'].value==='other'">
+        <small>G-工作日 J-节假日 Y-延时</small>
+      </div>
+      <div class="col-12">
+        <small>*自动模式仅支持按星期选择</small>
+      </div>
+    </div>
+    <div class="row">
+      <mat-radio-group formControlName="startTimeSelection">
+        <mat-radio-button value="live" class="col-5">当前时间</mat-radio-button>
+        <mat-radio-button value="time" class="col-3">指定时间</mat-radio-button>
+      </mat-radio-group>
+      <div class="col-3" *ngIf="selectorForm.controls['startTimeSelection'].value==='time'">
+        <mat-form-field>
+            <input matInput type="time" formControlName="startTime">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <button mat-stroked-button (click)="confirmCriteria()">确定</button>
+    </div>
+  </form>
+</div>

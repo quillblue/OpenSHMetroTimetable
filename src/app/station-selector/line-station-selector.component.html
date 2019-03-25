@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-4">
+    <mat-form-field>
+      <mat-select [placeholder]="'线路'" (selectionChange)="lineOnChange()" [(value)]="selectedLineId">
+        <mat-option *ngFor="let item of lineList" [value]="item.lineId">{{item.lineName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-8">
+    <mat-form-field>
+      <mat-select [placeholder]="'车站'" (selectionChange)="stationOnChange()" [(value)]="selectedStationId">
+        <mat-option *ngFor="let item of stationList" [value]="item.stationId">{{item.stationName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

@@ -1,1 +1,109 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+
+html {
+  font-family: Arial, Helvetica, sans-serif, "Microsoft YaHei"
+}
+
+.mat-tab-label,
+.mat-tab-link,
+.mat-expansion-panel-header {
+  font-family: Arial, Helvetica, sans-serif, "Microsoft YaHei"
+}
+
+.line-number-block {
+  height: 20px;
+  width: 18px;
+  font-size: 14px;
+  margin-right: 3px;
+  text-align: center;
+  color: #000;
+}
+
+.line-number-block.line-1,
+.line-number-block.line-4,
+.line-number-block.line-5,
+.line-number-block.line-6,
+.line-number-block.line-8,
+.line-number-block.line-11,
+.line-number-block.line-12,
+.line-number-block.line-17 {
+  color: white;
+}
+
+.line-number-block.line-1 {
+  background-color: #e6002a;
+}
+
+.line-number-block.line-2 {
+  background-color: #8cc220;
+}
+
+.line-number-block.line-3 {
+  background-color: #fcd600;
+}
+
+.line-number-block.line-4 {
+  background-color: #461d84;
+}
+
+.line-number-block.line-5 {
+  background-color: #944d9a;
+}
+
+.line-number-block.line-6 {
+  background-color: #d40068;
+}
+
+.line-number-block.line-7 {
+  background-color: #ed6f00;
+}
+
+.line-number-block.line-8 {
+  background-color: #0095d9;
+}
+
+.line-number-block.line-9 {
+  background-color: #87caed;
+}
+
+.line-number-block.line-10 {
+  background-color: #c6afd4;
+}
+
+.line-number-block.line-11 {
+  background-color: #871c2b;
+}
+
+.line-number-block.line-12 {
+  background-color: #007a60;
+}
+
+.line-number-block.line-13 {
+  background-color: #e999c0;
+}
+
+.line-number-block.line-14 {
+  background-color: #98d1c0;
+}
+
+.line-number-block.line-15 {
+  background-color: #b6766c;
+}
+
+.line-number-block.line-16 {
+  background: #98d1c0;
+}
+
+.line-number-block.line-17{
+  background:#bb796f;
+}
+
+.line-number-block.line-41 {
+  background-color: #b5b6b6;
+}
+
+.mat-form-field {
+  width: 100%;
+}

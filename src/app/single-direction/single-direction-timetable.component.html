@@ -1,0 +1,4 @@
+<div *ngFor="let item of watchList">
+    <app-single-direction-timetable-section [timetable]="item"></app-single-direction-timetable-section>
+</div>
+<app-single-direction-selector (criteriaConfirmed)="watchItemOnSave()"></app-single-direction-selector>
