@@ -682,4 +682,16 @@ export class Constants {
             }
         ];
     }
+    public static CurrentDiagramType(weekDay: number): string {
+        switch (weekDay) {
+            case 0: return 'Sun';
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                return 'MonToThur';
+            case 5: return 'Fri';
+            case 6: return 'Sat';
+        }
+    }
 }

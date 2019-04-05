@@ -2,6 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { SingleDirectionTimetable } from '../shared/models/single-direction-timetable';
 import { StationTimeTable } from '../shared/models/station-timetable';
 import { TimetableService } from '../shared/timetable.service';
+import { MatDialog } from '@angular/material';
+import { StationTimetableForInterchangeComponent } from '../station-timetable/station-timetable-for-interchange.component';
+import { Constants } from '../shared/util/constants';
+import { TimeFormatUtil } from '../shared/util/time-format-util';
+import { TrainTimetableComponent } from '../train-timetable/train-timetable.component';
 
 @Component({
     selector: 'app-single-direction-timetable-section',
@@ -10,11 +15,12 @@ import { TimetableService } from '../shared/timetable.service';
 })
 export class SingleDirectionTimetableSectionComponent implements OnInit {
     @Input() timetable: SingleDirectionTimetable;
+
     trains: StationTimeTable[];
     retryHandler: any;
     refreshHandler: any;
 
-    constructor(private timetableService: TimetableService) {
+    constructor(private timetableService: TimetableService, public dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -54,14 +60,7 @@ export class SingleDirectionTimetableSectionComponent implements OnInit {
     }
 
     getTimeDisplay(time: number) {
-        const seconds = time % 100;
-        time = Math.trunc(time / 100);
-        const minutes = time % 100;
-        const hours = Math.trunc(time / 100);
-        const hoursDisplay = hours < 10 ? '0' + hours.toString() : hours;
-        const minutesDisplay = minutes < 10 ? '0' + minutes.toString() : minutes;
-        const secondsDisplay = seconds < 10 ? '0' + seconds.toString() : seconds;
-        return hoursDisplay + ':' + minutesDisplay + ':' + secondsDisplay;
+        return TimeFormatUtil.getTimeDisplay(time);
     }
 
     getCountDownDisplay(targetTime: number, currentTime: Date) {
@@ -98,6 +97,29 @@ export class SingleDirectionTimetableSectionComponent implements OnInit {
         const currentMinutes = currentTime.getMinutes();
         const currentHours = currentTime.getHours();
         return (targetHours - currentHours) * 3600 + (targetMinutes - currentMinutes) * 60 + (targetSeconds - currentSeconds);
+    }
+
+    trackStation(item: StationTimeTable) {
+        this.dialog.open(StationTimetableForInterchangeComponent, {
+            width: '90%',
+            height: '80vh',
+            data: {
+                benchmarkLineId: this.timetable.lineId,
+                stationId: this.timetable.destStationId,
+                stationName: this.timetable.destStationName,
+                diagramType: this.timetable.diagramType === undefined ?
+                    Constants.CurrentDiagramType(new Date().getDay()) : this.timetable.diagramType,
+                time: item.destArrival
+            }
+        });
+    }
+
+    trackTrain(item: StationTimeTable) {
+        this.dialog.open(TrainTimetableComponent, {
+            width: '90%',
+            height: '80vh',
+            data: item
+        });
     }
 
 }

@@ -1,4 +1,5 @@
 export class StationTimeTable {
+    diagramNum: string;
     stationId: number;
     fromStationId: number;
     fromStationName: string;

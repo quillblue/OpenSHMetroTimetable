@@ -1,0 +1,48 @@
+<h1>{{criteria.stationName}} <small>{{getTimeDisplay(criteria.time)}}</small></h1>
+<div *ngFor="let item of timetableSections">
+    <div>
+        <span [class]="'line-number-block line-'+item.lineId">{{item.lineId}}</span>号线
+    </div>
+    <div *ngIf="criteria.benchmarkLineId!==undefined && criteria.benchmarkLineId!==item.lineId" class="interchange-guide">
+        <p>换乘指南：建设中</p>
+        <p>换乘时间：约 X分（步行）| 0:00（极限）</p>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td colspan="3">{{item.directionInfo[0].description}}</td>
+            </tr>
+            <tr>
+                <td>到</td>
+                <td>开</td>
+                <td>终点站</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of item.trains[0]">
+                <td>{{getTimeDisplay(t.fromArrival)}}</td>
+                <td>{{getTimeDisplay(t.fromDeparture)}}</td>
+                <td>{{t.finalStationName}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td colspan="3">{{item.directionInfo[1].description}}</td>
+                </tr>
+                <tr>
+                    <td>到</td>
+                    <td>开</td>
+                    <td>终点站</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of item.trains[1]">
+                    <td>{{getTimeDisplay(t.fromArrival)}}</td>
+                    <td>{{getTimeDisplay(t.fromDeparture)}}</td>
+                    <td>{{t.finalStationName}}</td>
+                </tr>
+            </tbody>
+        </table>
+</div>

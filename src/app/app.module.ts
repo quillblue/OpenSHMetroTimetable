@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatTabsModule, MatSelectModule, MatRadioModule, MatDividerModule, MatExpansionModule,
-  MatButtonModule, MatFormFieldModule, MatInputModule
+  MatButtonModule, MatFormFieldModule, MatInputModule, MatDialogModule
 } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
 
@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RestangularModule } from 'ngx-restangular';
 import { LineStationSelectorComponent } from './station-selector/line-station-selector.component';
+import { StationTimetableForInterchangeComponent } from './station-timetable/station-timetable-for-interchange.component';
+import { TrainTimetableComponent } from './train-timetable/train-timetable.component';
 
 const baseUrl = 'http://www.quillblue.com/shmetro-api';
 
@@ -31,7 +33,9 @@ export function RestangularConfigFactory(RestangularProvider) {
     SingleDirectionSelectorComponent,
     SingleDirectionTimetableComponent,
     SingleDirectionTimetableSectionComponent,
-    LineStationSelectorComponent
+    LineStationSelectorComponent,
+    StationTimetableForInterchangeComponent,
+    TrainTimetableComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +50,11 @@ export function RestangularConfigFactory(RestangularProvider) {
     MatExpansionModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ],
+  entryComponents: [StationTimetableForInterchangeComponent,
+    TrainTimetableComponent],
   providers: [TimetableService],
   bootstrap: [AppComponent]
 })

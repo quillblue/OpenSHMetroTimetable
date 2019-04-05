@@ -3,6 +3,7 @@ import { SingleDirectionTimetable } from '../shared/models/single-direction-time
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { SingleDirectionSelectorComponent } from './single-direction-selector.component';
 import { Constants } from '../shared/util/constants';
+import { MatDialog } from '@angular/material';
 
 
 @Component({
@@ -31,7 +32,6 @@ export class SingleDirectionTimetableComponent {
     if (this.itemEditor.selectorForm.controls['diagramTypeSelection'].value !== 'live') {
       item.diagramType = this.itemEditor.selectorForm.controls['diagramTypeSelection'].value;
     }
-    console.log(item);
     this.watchList.push(item);
   }
 }
