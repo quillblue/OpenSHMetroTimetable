@@ -3,6 +3,6 @@ export class StationTimetableCriteria {
     stationName: string;
     isLive: boolean;
     diagramType: string;
-    time: string;
+    time: number;
     benchmarkLineId: number;
 }

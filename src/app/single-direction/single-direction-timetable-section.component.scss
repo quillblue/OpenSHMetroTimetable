@@ -2,6 +2,15 @@
     padding:0 0.5rem;
 }
 
+.div-panel-header{
+    width:100%;
+}
+
+.btn-close{
+    float:right;
+    color:#666;
+}
+
 .train-countdown{
     display: block;
     font-size:2rem;
@@ -21,7 +30,13 @@
 
 .train-detail{
     float:left;
-    width:calc(100% - 110px);  
+    width:calc(100% - 150px);  
+}
+
+.train-operation{
+    display: block;
+    float:right;
+    width:40px;
 }
 
 label, span{
@@ -31,7 +46,8 @@ label, span{
 .mat-divider{
     margin:0.3rem 0 0 0;
 }
-a{
+.lblLink{
     color:#3f51b5;
     cursor: pointer;
+    margin-bottom:0;
 }

@@ -30,4 +30,12 @@ export class StationTimetableForInterchangeComponent implements OnInit {
     getTimeDisplay(time: number) {
         return TimeFormatUtil.getTimeDisplay(time);
     }
+
+    getInterchangeTimeDisplay(time: number) {
+        if (time) {
+            return Math.trunc(time / 100) + ':' + (time % 100 < 10 ? (time % 100 + '0') : (time % 100));
+        } else {
+            return '';
+        }
+    }
 }

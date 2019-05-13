@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { SingleDirectionTimetable } from '../shared/models/single-direction-timetable';
 import { StationTimeTable } from '../shared/models/station-timetable';
 import { TimetableService } from '../shared/timetable.service';
@@ -15,6 +15,7 @@ import { TrainTimetableComponent } from '../train-timetable/train-timetable.comp
 })
 export class SingleDirectionTimetableSectionComponent implements OnInit {
     @Input() timetable: SingleDirectionTimetable;
+    @Output() readonly unwatched = new EventEmitter<void>();
 
     trains: StationTimeTable[];
     retryHandler: any;
@@ -30,7 +31,11 @@ export class SingleDirectionTimetableSectionComponent implements OnInit {
     refreshLive(component) {
         const that = component === null ? this : component;
         that.timetableService.getSingleStationTimetable(that.timetable).subscribe((data) => {
-            that.trains = data;
+            if (that.trains) {
+                that.trains = that.trains.filter(t => t.locked).concat(data);
+            } else {
+                that.trains = data;
+            }
             that.refresh(that);
             // window.clearInterval();
             window.setInterval(that.refresh, 1000, that);
@@ -56,7 +61,8 @@ export class SingleDirectionTimetableSectionComponent implements OnInit {
 
     getCurrentTimeToNumber() {
         const currentTime = new Date();
-        return currentTime.getHours() * 3600 + currentTime.getMinutes() * 60 + currentTime.getSeconds();
+        const hours = currentTime.getHours() < 3 ? (currentTime.getHours() + 24) : currentTime.getHours();
+        return hours * 3600 + currentTime.getMinutes() * 60 + currentTime.getSeconds();
     }
 
     getTimeDisplay(time: number) {
@@ -120,6 +126,20 @@ export class SingleDirectionTimetableSectionComponent implements OnInit {
             height: '80vh',
             data: item
         });
+    }
+
+    lockTrain(item: StationTimeTable) {
+        item.locked = true;
+    }
+
+    unlockTrain(item: StationTimeTable) {
+        item.locked = false;
+    }
+
+    unwatch() {
+        if (confirm('确认要删除此项吗?')) {
+            this.unwatched.emit();
+        }
     }
 
 }

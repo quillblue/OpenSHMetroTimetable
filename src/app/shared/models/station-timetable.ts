@@ -14,4 +14,5 @@ export class StationTimeTable {
     startStationName: string;
     finalStationName: string;
     countdown: string;
+    locked: boolean;
 }

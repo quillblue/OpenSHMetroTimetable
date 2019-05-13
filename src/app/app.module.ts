@@ -5,7 +5,6 @@ import {
   MatTabsModule, MatSelectModule, MatRadioModule, MatDividerModule, MatExpansionModule,
   MatButtonModule, MatFormFieldModule, MatInputModule, MatDialogModule
 } from '@angular/material';
-import { QuillModule } from 'ngx-quill';
 
 import { AppComponent } from './app.component';
 import { SingleDirectionSelectorComponent } from './single-direction/single-direction-selector.component';
