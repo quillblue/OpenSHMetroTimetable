@@ -1,9 +1,7 @@
 import { Component, Input, ViewChild, OnInit } from '@angular/core';
 import { SingleDirectionTimetable } from '../shared/models/single-direction-timetable';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { SingleDirectionSelectorComponent } from './single-direction-selector.component';
 import { Constants } from '../shared/util/constants';
-import { MatDialog } from '@angular/material';
 
 
 @Component({
@@ -13,7 +11,7 @@ import { MatDialog } from '@angular/material';
 })
 export class SingleDirectionTimetableComponent implements OnInit {
   @Input() watchList: SingleDirectionTimetable[];
-  @ViewChild(SingleDirectionSelectorComponent) itemEditor: SingleDirectionSelectorComponent;
+  @ViewChild(SingleDirectionSelectorComponent, { static: true }) itemEditor: SingleDirectionSelectorComponent;
 
   ngOnInit() {
     const watchListStr = sessionStorage.getItem('watchList');

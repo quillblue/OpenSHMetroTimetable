@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Restangular } from 'ngx-restangular';
 import { Observable } from 'rxjs';
 import { StationTimeTable } from './models/station-timetable';
 import { SingleDirectionTimetable } from './models/single-direction-timetable';
 import { StationTimetableCriteria } from './models/station-timetable-criteria';
 import { InterchangeGuideAndTimetable } from './models/interchange-guide-and-timetable';
+import { Restangular } from 'ngx-restangular';
 
 @Injectable()
 export class TimetableService {

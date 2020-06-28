@@ -8,10 +8,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of timetable" [attr.class]="item.fromDeparture<criteria.fromDeparture?'pastStation':''">
+        <tr *ngFor="let item of timetable" [attr.class]="(item.fromDeparture<criteria.fromDeparture || item.fromDeparture===item.fromArrival)?'pastStation':''">
             <td style="text-align: left">{{item.fromStationName}}</td>
             <td>{{getTimeDisplay(item.fromArrival)}}</td>
-            <td>{{getTimeDisplay(item.fromDeparture)}}</td>
+            <td *ngIf="item.fromDeparture!==item.fromArrival">{{getTimeDisplay(item.fromDeparture)}}</td>
+            <td *ngIf="item.fromDeparture===item.fromArrival">不停靠</td>
         </tr>
     </tbody>
 </table>

@@ -13,7 +13,7 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
 })
 export class SingleDirectionSelectorComponent implements OnInit {
   selectorForm: FormGroup;
-  @ViewChild(LineStationSelectorComponent) lineStationSelector: LineStationSelectorComponent;
+  @ViewChild(LineStationSelectorComponent, { static: true }) lineStationSelector: LineStationSelectorComponent;
   @Output() readonly criteriaConfirmed = new EventEmitter<void>();
 
   destStationList: any[];

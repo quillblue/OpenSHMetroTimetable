@@ -17,8 +17,10 @@
     <label class="train-countdown">{{item.countdown}}</label>
     <div class="train-detail">
       <span><label class="lblLink" (click)="trackTrain(item)">{{item.trainNo}}次</label> {{item.startStationName}} -&gt; {{item.finalStationName}}</span><br/>
-      <span>{{getTimeDisplay(item.fromArrival)}}到 {{getTimeDisplay(item.fromDeparture)}}开</span><br/>
-      <span *ngIf="timetable.destStationName!==undefined">{{getTimeDisplay(item.destArrival)}}到{{item.destStationName}}</span> <label class="lblLink" (click)="trackStation(item)">转乘列车时刻</label><br/>
+      <span *ngIf="item.fromArrival!==item.fromDeparture">{{getTimeDisplay(item.fromArrival)}}到 {{getTimeDisplay(item.fromDeparture)}}开</span><br/>
+      <span *ngIf="item.fromArrival===item.fromDeparture">{{getTimeDisplay(item.fromArrival)}} 通</span><br/>
+      <span *ngIf="item.fromArrival===item.fromDeparture">不停靠列车</span><br/>
+      <span *ngIf="timetable.destStationName!==undefined && item.fromArrival!==item.fromDeparture">{{getTimeDisplay(item.destArrival)}}到{{item.destStationName}}</span> <label class="lblLink" (click)="trackStation(item)">转乘列车时刻</label><br/>
     </div>
     <div class="train-operation">
       <img *ngIf="item.locked===undefined || !item.locked" src="../../assets/image/unpinned.png" (click)="lockTrain(item)">
