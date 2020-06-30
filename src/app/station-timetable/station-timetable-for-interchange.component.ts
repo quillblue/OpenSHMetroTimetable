@@ -1,10 +1,10 @@
-import { Component, Input, Output, EventEmitter, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Constants } from '../shared/util/constants';
 import { TimetableService } from '../shared/timetable.service';
-import { MAT_DIALOG_DATA } from '@angular/material';
 import { StationTimetableCriteria } from '../shared/models/station-timetable-criteria';
 import { InterchangeGuideAndTimetable } from '../shared/models/interchange-guide-and-timetable';
 import { TimeFormatUtil } from '../shared/util/time-format-util';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-station-timetable-for-interchange',
@@ -13,7 +13,7 @@ import { TimeFormatUtil } from '../shared/util/time-format-util';
 })
 
 export class StationTimetableForInterchangeComponent implements OnInit {
-    constructor(@Inject(MAT_DIALOG_DATA) public criteria: StationTimetableCriteria, private timetableService: TimetableService) { }
+    constructor( @Inject(MAT_DIALOG_DATA) public criteria: StationTimetableCriteria, private timetableService: TimetableService) { }
 
     timetableSections: InterchangeGuideAndTimetable[] = [];
 

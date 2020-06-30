@@ -1,10 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatTabsModule, MatSelectModule, MatRadioModule, MatDividerModule, MatExpansionModule,
-  MatButtonModule, MatFormFieldModule, MatInputModule, MatDialogModule
-} from '@angular/material';
+import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { SingleDirectionSelectorComponent } from './single-direction/single-direction-selector.component';
@@ -13,18 +18,13 @@ import { SingleDirectionTimetableSectionComponent } from './single-direction/sin
 import { TimetableService } from './shared/timetable.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RestangularModule } from 'ngx-restangular';
 import { LineStationSelectorComponent } from './station-selector/line-station-selector.component';
 import { StationTimetableForInterchangeComponent } from './station-timetable/station-timetable-for-interchange.component';
 import { TrainTimetableComponent } from './train-timetable/train-timetable.component';
 
 const baseUrl = 'http://www.quillblue.com/shmetro-api';
 
-// Function for setting the default restangular configuration
-export function RestangularConfigFactory(RestangularProvider) {
-  RestangularProvider.setBaseUrl(baseUrl);
-  // RestangularProvider.setDefaultHttpFields({ withCredentials: true });
-}
+
 
 @NgModule({
   declarations: [
@@ -40,7 +40,6 @@ export function RestangularConfigFactory(RestangularProvider) {
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RestangularModule.forRoot(RestangularConfigFactory),
     BrowserAnimationsModule,
     MatTabsModule,
     MatSelectModule,
@@ -52,7 +51,8 @@ export function RestangularConfigFactory(RestangularProvider) {
     MatInputModule,
     MatDialogModule
   ],
-  entryComponents: [StationTimetableForInterchangeComponent,
+  entryComponents: [
+    StationTimetableForInterchangeComponent,
     TrainTimetableComponent],
   providers: [TimetableService],
   bootstrap: [AppComponent]

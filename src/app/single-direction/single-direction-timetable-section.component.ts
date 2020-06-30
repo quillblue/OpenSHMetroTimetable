@@ -2,11 +2,11 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { SingleDirectionTimetable } from '../shared/models/single-direction-timetable';
 import { StationTimeTable } from '../shared/models/station-timetable';
 import { TimetableService } from '../shared/timetable.service';
-import { MatDialog } from '@angular/material';
 import { StationTimetableForInterchangeComponent } from '../station-timetable/station-timetable-for-interchange.component';
 import { Constants } from '../shared/util/constants';
 import { TimeFormatUtil } from '../shared/util/time-format-util';
 import { TrainTimetableComponent } from '../train-timetable/train-timetable.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-single-direction-timetable-section',

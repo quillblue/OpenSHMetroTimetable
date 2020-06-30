@@ -1,9 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { SingleDirectionTimetable } from '../shared/models/single-direction-timetable';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { LineStationSelectorComponent } from '../station-selector/line-station-selector.component';
 import { Constants } from '../shared/util/constants';
-import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({

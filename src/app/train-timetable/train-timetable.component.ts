@@ -1,10 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit, Inject } from '@angular/core';
-import { Constants } from '../shared/util/constants';
+import { Component, OnInit, Inject } from '@angular/core';
 import { TimetableService } from '../shared/timetable.service';
-import { MAT_DIALOG_DATA } from '@angular/material';
-import { StationTimetableCriteria } from '../shared/models/station-timetable-criteria';
 import { TimeFormatUtil } from '../shared/util/time-format-util';
 import { StationTimeTable } from '../shared/models/station-timetable';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-train-timetable',
@@ -20,7 +18,7 @@ export class TrainTimetableComponent implements OnInit {
     ngOnInit() {
         console.log(this.criteria);
         this.timetableService.getSingleTrainTimetable(this.criteria).subscribe((result) => {
-             this.timetable = result;
+            this.timetable = result;
         });
     }
 

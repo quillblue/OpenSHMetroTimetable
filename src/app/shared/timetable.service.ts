@@ -4,45 +4,49 @@ import { StationTimeTable } from './models/station-timetable';
 import { SingleDirectionTimetable } from './models/single-direction-timetable';
 import { StationTimetableCriteria } from './models/station-timetable-criteria';
 import { InterchangeGuideAndTimetable } from './models/interchange-guide-and-timetable';
-import { Restangular } from 'ngx-restangular';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class TimetableService {
+    private serviceBaseUrl: string;
 
-    private singleDirection$ = this.restangular.all('single');
-    private singleTrainTimetable$ = this.restangular.all('train');
-    private stationTimetable$ = this.restangular.all('station');
-
-
-    constructor(private restangular: Restangular) {
-
+    constructor(private http: HttpClient) {
+        this.serviceBaseUrl = 'http://www.quillblue.com/shmetro-api';
     }
 
     getSingleStationTimetable(criteria: SingleDirectionTimetable): Observable<StationTimeTable[]> {
-        return this.singleDirection$.getList({
-            line: criteria.lineId, fromStation: criteria.stationId,
-            toStation: criteria.destStationId, live: criteria.isLive ? 1 : 0,
-            diagramType: criteria.diagramType,
-            diagramSpecified: criteria.diagramSpecified,
-            direction: criteria.direction,
-            travelTime: criteria.startTime.replace(':', '') + '00'
+        return this.http.get<StationTimeTable[]>(this.serviceBaseUrl + '/single', {
+            params: {
+                line: criteria.lineId.toString(),
+                fromStation: criteria.stationId.toString(),
+                toStation: criteria.destStationId === undefined ? '' : criteria.destStationId.toString(),
+                live: criteria.isLive ? '1' : '0',
+                diagramType: criteria.diagramType,
+                diagramSpecified: criteria.diagramSpecified,
+                direction: criteria.direction === undefined ? '' : criteria.direction.toString(),
+                travelTime: criteria.startTime.replace(':', '') + '00'
+            }
         });
     }
 
     getSingleTrainTimetable(criteria: StationTimeTable): Observable<StationTimeTable[]> {
-        return this.singleTrainTimetable$.getList({
-            trainNo: criteria.trainNo,
-            benchmarkStationId: criteria.fromStationId,
-            benchmarkStationDept: criteria.fromDeparture,
-            diagramSpecified: criteria.diagramNum
+        return this.http.get<StationTimeTable[]>(this.serviceBaseUrl + '/train', {
+            params: {
+                trainNo: criteria.trainNo,
+                benchmarkStationId: criteria.fromStationId.toString(),
+                benchmarkStationDept: criteria.fromDeparture.toString(),
+                diagramSpecified: criteria.diagramNum
+            }
         });
     }
 
     getStationTimetable(criteria: StationTimetableCriteria): Observable<InterchangeGuideAndTimetable[]> {
-        return this.stationTimetable$.getList({
-            station: criteria.stationId,
-            diagramType: criteria.diagramType,
-            time: criteria.time
+        return this.http.get<InterchangeGuideAndTimetable[]>(this.serviceBaseUrl + '/station', {
+            params: {
+                station: criteria.stationId.toString(),
+                diagramType: criteria.diagramType,
+                time: criteria.time.toString()
+            }
         });
     }
 }
