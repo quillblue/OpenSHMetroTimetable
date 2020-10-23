@@ -95,14 +95,18 @@ export class SingleDirectionTimetableSectionComponent implements OnInit {
     }
 
     getNextRefreshSeconds(targetTime: number) {
-        const currentTime = new Date();
-        const targetSeconds = targetTime % 100;
-        const targetMinutes = Math.trunc(targetTime / 100) % 100;
-        const targetHours = Math.trunc(targetTime / 10000);
-        const currentSeconds = currentTime.getSeconds();
-        const currentMinutes = currentTime.getMinutes();
-        const currentHours = currentTime.getHours();
-        return (targetHours - currentHours) * 3600 + (targetMinutes - currentMinutes) * 60 + (targetSeconds - currentSeconds);
+        if (this.timetable.isLive) {
+            const currentTime = new Date();
+            const targetSeconds = targetTime % 100;
+            const targetMinutes = Math.trunc(targetTime / 100) % 100;
+            const targetHours = Math.trunc(targetTime / 10000);
+            const currentSeconds = currentTime.getSeconds();
+            const currentMinutes = currentTime.getMinutes();
+            const currentHours = currentTime.getHours();
+            return (targetHours - currentHours) * 3600 + (targetMinutes - currentMinutes) * 60 + (targetSeconds - currentSeconds);
+        } else {
+            return 60;
+        }
     }
 
     trackStation(item: StationTimeTable) {

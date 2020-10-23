@@ -353,7 +353,7 @@ export class Constants {
                     { stationName: '白银路', stationId: 1133 },
                     { stationName: '嘉定新城', stationId: 1134 },
                     { stationName: '马陆', stationId: 1135 },
-                    // {stationName:'陈翔路', stationId:1136},
+                    { stationName: '陈翔公路', stationId: 1136 },
                     { stationName: '南翔', stationId: 1137 },
                     { stationName: '桃浦新村', stationId: 1138 },
                     { stationName: '武威路', stationId: 1139 },
