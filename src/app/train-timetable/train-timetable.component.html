@@ -1,18 +1,36 @@
-<h1 *ngIf="timetable?.length>0">{{timetable[0].trainNo}} 次 <small>{{timetable[0].diagramNum.replace('G','工作日').replace('Y','延长').replace('J','节假日')}}</small></h1>
+<h1 *ngIf="timetable?.length > 0">
+  {{ timetable[0].trainNo }} 次
+  <small>{{
+    timetable[0].diagramNum
+      .replace("G", "工作日")
+      .replace("Y", "延长")
+      .replace("J", "节假日")
+  }}</small>
+</h1>
 <table class="table">
-    <thead>
-        <tr>
-            <td>车站</td>
-            <td>到</td>
-            <td>开</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of timetable" [attr.class]="(item.fromDeparture<criteria.fromDeparture || item.fromDeparture===item.fromArrival)?'pastStation':''">
-            <td style="text-align: left">{{item.fromStationName}}</td>
-            <td *ngIf="item.fromDeparture!==item.fromArrival">{{getTimeDisplay(item.fromArrival)}}</td>
-            <td *ngIf="item.fromDeparture===item.fromArrival">不停靠</td>
-            <td>{{getTimeDisplay(item.fromDeparture)}}</td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <td>车站</td>
+      <td>到</td>
+      <td>开</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let item of timetable"
+      [attr.class]="
+        item.fromDeparture < criteria.fromDeparture ||
+        item.fromDeparture === item.fromArrival
+          ? 'pastStation'
+          : ''
+      "
+    >
+      <td style="text-align: left">{{ item.fromStationName }}</td>
+      <td *ngIf="item.fromDeparture !== item.fromArrival">
+        {{ item.fromArrival }}
+      </td>
+      <td *ngIf="item.fromDeparture === item.fromArrival">不停靠</td>
+      <td>{{ item.fromDeparture }}</td>
+    </tr>
+  </tbody>
 </table>
