@@ -145,7 +145,6 @@
       }
     }
   },
-  "defaultProject": "shmetro-timetable",
   "cli": {
     "analytics": false
   }
