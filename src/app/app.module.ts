@@ -51,9 +51,6 @@ const baseUrl = 'http://www.quillblue.com/shmetro-api';
     MatInputModule,
     MatDialogModule
   ],
-  entryComponents: [
-    StationTimetableForInterchangeComponent,
-    TrainTimetableComponent],
   providers: [TimetableService],
   bootstrap: [AppComponent]
 })
